@@ -11,32 +11,48 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+/**
+ * ConnectionHandler Class
+ *
+ * This class handles communication with the Generate Coding Challenge server, providing functionality for registration,
+ * retrieving challenge values, and submitting answers.
+ */
 public class ConnectionHandler {
+
+    /** The HTTP client used for making requests. */
     private final HttpClient client;
 
+    /** The base URL of the Generate Coding Challenge server. */
     private final String baseURL = "https://generate-coding-challenge-server-rellb.ondigitalocean.app/";
 
-
+    /**
+     * Constructs a ConnectionHandler with a provided HttpClient.
+     * @TODO: using for testing purposes
+     *
+     * @param client The HttpClient to be used for making requests.
+     */
     public ConnectionHandler(HttpClient client) {
         this.client = client;
     }
 
+    /**
+     * Constructs a ConnectionHandler with a default HttpClient.
+     */
     public ConnectionHandler() {
         this.client = HttpClient.newHttpClient();
     }
 
-
     /**
-     * This function handles registering for the generate coding challenge
-     * @param name- The name you wish to use to register
-     * @param NUID- The NUID you wish to use to register
-     * @return- body of the HTTPResponse, as a String
+     * Handles user registration for the Generate Coding Challenge.
+     *
+     * @param name The name to use for registration.
+     * @param NUID The NUID to use for registration.
+     * @return The body of the HTTPResponse as a String.
      */
     public String register(String name, String NUID) {
         String payload = "{ \"name\" : \"" + name + "\", \"nuid\": \"" + NUID + "\"}";
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(baseURL +"register"))
+                .uri(URI.create(baseURL + "register"))
                 .header("Content-Type", "application/json") // Set content type as JSON
                 .POST(HttpRequest.BodyPublishers.ofString(payload))
                 .build();
@@ -44,13 +60,14 @@ public class ConnectionHandler {
     }
 
     /**
-     * This function handles retrieving challenge values for the generate coding challenge
-     * @param token- the user token for
-     * @return- body of the HTTPResponse, as a String
+     * Retrieves challenge values for the Generate Coding Challenge.
+     *
+     * @param token The user token.
+     * @return A List of challenge values as Strings.
      */
     public List<String> getChallenge(String token){
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(baseURL +"challenge/" + token))
+                .uri(URI.create(baseURL + "challenge/" + token))
                 .build();
         HttpResponse<String> response;
         List<String> challenges = new ArrayList<>();
@@ -75,7 +92,13 @@ public class ConnectionHandler {
         return challenges;
     }
 
-
+    /**
+     * Submits answers for the Generate Coding Challenge.
+     *
+     * @param token The user token.
+     * @param answers A List of answers as Strings.
+     * @return The body of the HTTPResponse as a String.
+     */
     public String submit(String token, List<String> answers) {
         StringBuilder content = new StringBuilder().append('[');
         for (String answer : answers){
@@ -85,14 +108,19 @@ public class ConnectionHandler {
         content.append(']');
         System.out.println(content);
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(baseURL +"submit/" + token))
+                .uri(URI.create(baseURL + "submit/" + token))
                 .header("Content-Type", "application/json") // Set content type as JSON
                 .POST(HttpRequest.BodyPublishers.ofString(content.toString()))
                 .build();
         return retrieveResponse(request);
     }
 
-    //Helper- > Sends generated request and retrieves response body as a String
+    /**
+     * Helper method that sends a generated request and retrieves the response body as a String.
+     *
+     * @param request The HttpRequest to be sent.
+     * @return The body of the HTTPResponse as a String.
+     */
     private String retrieveResponse(HttpRequest request) {
         HttpResponse<String> response = null;
         try {
