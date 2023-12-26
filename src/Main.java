@@ -13,14 +13,8 @@ public class Main {
         ConnectionHandler connectionHandler = new ConnectionHandler();
         String token = getTokenFromFile();
         List<String> challenges = connectionHandler.getChallenge(token);
-        List<String> results = new ArrayList<>();
+        List<String> results = BarcodeSolver.solveAll(challenges, Strategies.BASIC);
 
-        //For Strategy in Strategies.enumerate()
-            //clear results
-            //
-        for (String challenge : challenges){
-            results.add(BarcodeSolver.solve(challenge, Strategies.BASIC));
-        }
         assert challenges.size() == results.size();
         System.out.println(results);
         System.out.println(connectionHandler.submit(token, results));

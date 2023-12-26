@@ -1,8 +1,47 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
+/**
+ * The `BarcodeSolver` class provides methods for solving barcodes based on a specified strategy.
+ *
+ * The barcodes are represented as a list of strings, and the solving strategy is determined by the
+ * `Strategies` enum, which includes options such as `BASIC`, `ZERO_ENCRYPT`, and 'POST_PROCESSING'.
+ *
+ * The class contains a static method `solveAll` that takes a list of barcodes and a strategy as
+ * parameters, and returns a list of solved barcodes using the specified strategy.
+ *
+ * Example Usage:
+ * ```java
+ * List<String> barcodes = Arrays.asList("barcode1", "barcode2", "barcode3");
+ * List<String> solvedBarcodes = BarcodeSolver.solveAll(barcodes, Strategies.BASIC);
+ * ```
+ */
 public class BarcodeSolver {
 
-    public static String solve(String barcode, Strategies strategy){
+    /**
+     * Solves all barcodes in the given list using the specified strategy.
+     *
+     * @param barcodes  A list of barcodes to be solved.
+     * @param strategy  The strategy used for solving the barcodes.
+     * @return A list of solved barcodes.
+     */
+    public static List<String> solveAll(List<String> barcodes, Strategies strategy){
+        //initialize accumulator
+        List<String> retList = new ArrayList<>();
+
+        //call solve on each barcode, and append to accumulator
+        for (String barcode : barcodes){
+            retList.add(solve(barcode, strategy));
+        }
+        //return accumulator
+        return retList;
+    }
+
+    //Solves a single barcode with a given Strategy
+    private static String solve(String barcode, Strategies strategy){
 
         //Split into array on # symbols
         String[] splitCode = barcode.split("#");
