@@ -88,7 +88,6 @@ public class ConnectionHandler {
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(challenges);
         return challenges;
     }
 
@@ -97,22 +96,62 @@ public class ConnectionHandler {
      *
      * @param token The user token.
      * @param answers A List of answers as Strings.
-     * @return The body of the HTTPResponse as a String.
+     * @return The submit outcome of either success or Failure.
      */
-    public String submit(String token, List<String> answers) {
+    public SubmitOutcome submit(String token, List<String> answers) {
+
+        //Build request
         StringBuilder content = new StringBuilder().append('[');
         for (String answer : answers){
-            content.append("\"").append(answer).append("\",");
+            //content.append("\"").append(answer).append("\",");
         }
         content.deleteCharAt(content.length()-1);
         content.append(']');
-        System.out.println(content);
+        System.out.println("Content pre serialization" + content);
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(baseURL + "submit/" + token))
                 .header("Content-Type", "application/json") // Set content type as JSON
                 .POST(HttpRequest.BodyPublishers.ofString(content.toString()))
                 .build();
-        return retrieveResponse(request);
+
+        //Send and generate response
+        // TODO: Refactor duplicate code
+        HttpResponse<String> response = null;
+        try {
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        }
+        catch (IOException | InterruptedException e){
+            System.out.println(Arrays.toString(e.getStackTrace()));
+            System.exit(-1);
+        }
+
+        try {
+            // Parse the response JSON
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode jsonResponse = objectMapper.readTree(response.body());
+
+            //TODO: Remove once mocks are properly defined
+            System.out.println("JsonNode Value:");
+            System.out.println(jsonResponse);
+
+            // Check the 'correct' field in the response
+            boolean isCorrect = jsonResponse.get("correct").asBoolean();
+
+            // Determine the SubmitOutcome based on the response
+            if (isCorrect) {
+                return SubmitOutcome.SUCCESS;
+            } else {
+                return SubmitOutcome.FAILURE;
+            }
+
+        } catch (Exception e) {
+            // Handle exceptions, e.g., network issues or JSON parsing errors
+            e.printStackTrace();
+        }
+
+        // Default outcome in case of errors
+        return SubmitOutcome.FAILURE;
+
     }
 
     /**

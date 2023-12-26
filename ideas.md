@@ -9,6 +9,8 @@ Key:
 - Maybe they threw in some special chars they didn't specifically allow? CLOSED
 - Maybe I am interpreting encryption incorrectly? CLOSED: ZeroEncrypt
 - Repeat could be intended to repeat the raw block OPEN
+- Answer serialization could be messed up with list object OPEN
+  - Could fix by using Jackson serialization OPEN
 
 ## What assumptions did I make that could be causing me problems?
 - I am assuming valid input CLOSED

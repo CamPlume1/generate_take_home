@@ -5,8 +5,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
 
+/**
+ * Short program that handled registration.
+ */
 public class Registration {
     public static void main(String[] args) {
         String filePath = "C:\\Users\\Cam\\Desktop\\generate_barcode\\src\\challenge.txt";
