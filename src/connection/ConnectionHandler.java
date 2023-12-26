@@ -103,7 +103,7 @@ public class ConnectionHandler {
         //Build request
         StringBuilder content = new StringBuilder().append('[');
         for (String answer : answers){
-            //content.append("\"").append(answer).append("\",");
+            content.append("\"").append(answer).append("\",");
         }
         content.deleteCharAt(content.length()-1);
         content.append(']');
@@ -119,6 +119,7 @@ public class ConnectionHandler {
         HttpResponse<String> response = null;
         try {
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println("Response Recieved: " + response.toString());
         }
         catch (IOException | InterruptedException e){
             System.out.println(Arrays.toString(e.getStackTrace()));
@@ -141,6 +142,7 @@ public class ConnectionHandler {
             if (isCorrect) {
                 return SubmitOutcome.SUCCESS;
             } else {
+                System.out.println("True Failure");
                 return SubmitOutcome.FAILURE;
             }
 
