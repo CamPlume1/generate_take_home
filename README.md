@@ -71,6 +71,7 @@ Due to a lack of testing, I somewhat suspect that my connection handling is the 
 
 ## Next Steps and things I should have done differently
 - Full Mock testing of the ConnectionHandler class
+- Update submit() method to use Object mapper instead of String serialization
 - Add a strategy that does NOT filter out invalid input
 - Implement "combination" strategies, combining different interpretations of encrypt, repeat, and reverse.
   - This would require a design change to function objects being passed as arguments to a generic BlockNode object, to avoid n Choose 3 classes being created.
