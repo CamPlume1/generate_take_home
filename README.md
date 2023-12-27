@@ -57,6 +57,8 @@ This strategy repeats the previous node as a distinct data block, instead of inc
 It should be noted that this strategy can be disproven by the given test case, which I realized in testing. I decided to include in my submission regardless.
 
 ### Strategy 4: RepeatTags
+This is a strategy I tried that has a large logical error, in that I tried repeating unprocessed nodes. This leads to an infinite loop.
+This strategy no longer executes in my program, but the code can be found in class repeatTagsBlockNode
 
 ### Strategy 5: PostProcessing
 In this strategy, special characters are processed after all numbers in a block have been set, therefore changing the position of repeated strings within a node.
@@ -73,3 +75,4 @@ Due to a lack of testing, I somewhat suspect that my connection handling is the 
 - Implement "combination" strategies, combining different interpretations of encrypt, repeat, and reverse.
   - This would require a design change to function objects being passed as arguments to a generic BlockNode object, to avoid n Choose 3 classes being created.
   - I should have started with this design, as it would have allowed me greater flexibility in the number of strategies I was able to test.
+- I have a lot of cleanup work to do, extracting duplicate code and fixing other style issues

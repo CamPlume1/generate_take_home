@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 /**
  * ConnectionHandler Class
- *
+ * TODO: Full unit testing
  * This class handles communication with the Generate Coding Challenge server, providing functionality for registration,
  * retrieving challenge values, and submitting answers.
  */

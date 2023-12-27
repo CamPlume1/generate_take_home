@@ -65,9 +65,10 @@ public class BarcodeSolver {
             else if(strategy == Strategies.REPEAT_FULL_BLOCK){
                 temp = new repeatFullBlockNode(current);
             }
-            else if (strategy == Strategies.REPEAT_RAW_DATA){
-                temp = new repeatTagsBlockNode(current);
+            else if (strategy == Strategies.POST_PROCESS){
+                temp = new PostProcessingBlockNode(current);
             }
+
 
             //Set Nodes
             previous.setNext(temp);

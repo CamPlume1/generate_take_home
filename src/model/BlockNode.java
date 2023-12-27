@@ -3,7 +3,7 @@ package model;
 /**
  * Original BlockNode Implementation
  * Uses a doubly linked List structure
- *
+ * Basic implementation
  */
 public class BlockNode implements IBlockNode{
 

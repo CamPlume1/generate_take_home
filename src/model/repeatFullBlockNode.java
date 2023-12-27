@@ -1,7 +1,9 @@
 package model;
 
-//Repeat raw blocks when repeating
-//This cannot be the solution within the given specifications, but I'm out of ideas
+/**
+ * Repeat full blocks when repeating
+ * This cannot be the solution within the given specifications, but I'm out of ideas
+ */
 public class repeatFullBlockNode extends BlockNode{
     public repeatFullBlockNode(String value) {
         super(value);
