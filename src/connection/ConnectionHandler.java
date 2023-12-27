@@ -119,7 +119,7 @@ public class ConnectionHandler {
         HttpResponse<String> response = null;
         try {
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println("Response Recieved: " + response.toString());
+            System.out.println("Response Received: " + response.toString());
         }
         catch (IOException | InterruptedException e){
             System.out.println(Arrays.toString(e.getStackTrace()));

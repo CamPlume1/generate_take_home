@@ -13,17 +13,27 @@ public class BlockNode implements IBlockNode{
     //Item after node in list
     public IBlockNode next;
 
-    //Initial value of the node
+    //initial value of the nod
+    private final String initialValue;
+
+    //current, or evaluated value of the node
     protected String val;
 
 
     public BlockNode(String value){
         this.val = value;
+        this.initialValue = value;
     }
 
     @Override
     public String toString(){
         return this.val;
+    }
+
+
+    @Override
+    public String getOriginal() {
+        return this.initialValue;
     }
 
 

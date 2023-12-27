@@ -1,4 +1,6 @@
+import com.sun.net.httpserver.Authenticator;
 import connection.ConnectionHandler;
+import connection.SubmitOutcome;
 import model.BarcodeSolver;
 import model.Strategies;
 
@@ -13,11 +15,20 @@ public class Main {
         ConnectionHandler connectionHandler = new ConnectionHandler();
         String token = getTokenFromFile();
         List<String> challenges = connectionHandler.getChallenge(token);
-        List<String> results = BarcodeSolver.solveAll(challenges, Strategies.BASIC);
-
-        assert challenges.size() == results.size();
-        System.out.println(results);
-        System.out.println(connectionHandler.submit(token, results));
+        for (Strategies strategy : Strategies.values()) {
+            System.out.println("Attempting Challenge with Strategy: " + strategy.toString());
+            List<String> results = BarcodeSolver.solveAll(challenges, strategy);
+            assert challenges.size() == results.size();
+            SubmitOutcome outcome = connectionHandler.submit(token, results);
+            if (outcome.equals(SubmitOutcome.SUCCESS)){
+                System.out.println(outcome.toString());
+                System.out.println("Challenge Success with Strategy: " + strategy.toString());
+            }
+            else {
+                System.out.println("Challenge Failure with Strategy: " + strategy.toString());
+                System.out.print("\n\n");
+            }
+        }
 
     }
 

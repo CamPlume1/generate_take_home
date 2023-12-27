@@ -62,6 +62,12 @@ public class BarcodeSolver {
             else if (strategy == Strategies.ZERO_ENCRYPT){
                 temp = new ZeroEncryptBlockNode(current);
             }
+            else if(strategy == Strategies.REPEAT_FULL_BLOCK){
+                temp = new repeatFullBlockNode(current);
+            }
+            else if (strategy == Strategies.REPEAT_RAW_DATA){
+                temp = new repeatTagsBlockNode(current);
+            }
 
             //Set Nodes
             previous.setNext(temp);

@@ -31,6 +31,14 @@ public interface IBlockNode {
      */
     public String toString();
 
+
+    /**
+     * gets the original value of a Node
+     *
+     * @return the String originally passed into the constructor
+     */
+    public String getOriginal();
+
     /**
      * Sets the previous node in the doubly linked list.
      *
