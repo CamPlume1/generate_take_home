@@ -1,6 +1,7 @@
 # Introduction
+#### Correct solution created AFTER interview
 
-I have not been able to generate a working solution. This README details my approach to this problem across a couple different verticals:
+I was not been able to generate a working solution. This README details my approach to this problem across a couple different verticals:
 - First, I will address how my algorithm works at a data structure level
 - Next, I will walk through my attempts to find edge cases or interpretations I could be missing
   - A living document detailing areas I am working on and my brainstorming process is available [here](./ideas.md)
@@ -66,6 +67,9 @@ In this strategy, special characters are processed after all numbers in a block 
 ### Strategy 6: Allow Invalids
 In this strategy, non-digit characters are NOT filtered out of barcodes. Originally they were, allowing for invalid input to be handled gracefully.
 
+### Strategy 7: In Queue
+**NOTE: I generated this solution AFTER my interview, with the solution given by my interviewer**
+commands in the current block are processed before commands applied to the previous block
 
 ## Connection Handling
 For this project, I used the HTTP Client, HTTP Response, and jackson library to parse, build, and send API requests.
