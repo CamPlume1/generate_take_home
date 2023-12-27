@@ -68,6 +68,10 @@ public class BarcodeSolver {
             else if (strategy == Strategies.POST_PROCESS){
                 temp = new PostProcessingBlockNode(current);
             }
+            else if (strategy == Strategies.ALLOW_INVALIDS){
+                temp = new AllowInvalidsBlockNode(current);
+            }
+
 
 
             //Set Nodes

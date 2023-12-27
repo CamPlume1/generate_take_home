@@ -135,12 +135,14 @@ public class BarcodeSolverTest {
     private void givenTestCases(Strategies strategy){
         String baseCorrect = "1221430867";
         //Original test Case, empty
-        String comparison = BarcodeSolver.solveAll(List.of("#12#34!#59^#67%#"), strategy).get(0);
+        String comparison = BarcodeSolver.solveAll(List.of("#12#34!#59^#67%#", "#0%#1%#2%#3%#4%#5%#6%#7%#8%#9%#"), strategy).get(0);
+        String comparison4 = BarcodeSolver.solveAll(List.of("#12#34!#59^#67%#", "#0%#1%#2%#3%#4%#5%#6%#7%#8%#9%#"), strategy).get(1);
         String comparison2 = BarcodeSolver.solveAll(List.of("######", ""), strategy).get(0);
         String comparison3 = BarcodeSolver.solveAll(List.of("######", ""), strategy).get(1);
         assertEquals(comparison, baseCorrect);
         assertEquals(comparison2, "");
         assertEquals(comparison3, "");
+        assertEquals(comparison4, "0246802469");
 
 
     }

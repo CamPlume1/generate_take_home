@@ -63,6 +63,9 @@ This strategy no longer executes in my program, but the code can be found in cla
 ### Strategy 5: PostProcessing
 In this strategy, special characters are processed after all numbers in a block have been set, therefore changing the position of repeated strings within a node.
 
+### Strategy 6: Allow Invalids
+In this strategy, non-digit characters are NOT filtered out of barcodes. Originally they were, allowing for invalid input to be handled gracefully.
+
 
 ## Connection Handling
 For this project, I used the HTTP Client, HTTP Response, and jackson library to parse, build, and send API requests.

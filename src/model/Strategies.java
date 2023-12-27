@@ -24,7 +24,14 @@ public enum Strategies {
     /**
      * Special characters are filtered and executed after the body of digits
      */
-   POST_PROCESS("Special characters are filtered and executed after the body of digits");
+   POST_PROCESS("Special characters are filtered and executed after the body of digits"),
+
+    /**
+     * Allow Invalids
+     * non digit characters are not filtered out using this strategy
+     */
+    ALLOW_INVALIDS("Non digit characters are not filtered out using this strategy");
+
 
     private final String stringValue;
 
