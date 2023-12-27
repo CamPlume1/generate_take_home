@@ -30,7 +30,9 @@ public enum Strategies {
      * Allow Invalids
      * non digit characters are not filtered out using this strategy
      */
-    ALLOW_INVALIDS("Non digit characters are not filtered out using this strategy");
+    ALLOW_INVALIDS("Non digit characters are not filtered out using this strategy"),
+
+    IN_QUEUE("Applies current block operations before previous block");
 
 
     private final String stringValue;

@@ -70,8 +70,9 @@ public class BarcodeSolver {
             }
             else if (strategy == Strategies.ALLOW_INVALIDS){
                 temp = new AllowInvalidsBlockNode(current);
+            } else if (strategy == Strategies.IN_QUEUE) {
+                temp = new InQueueBlockNode(current);
             }
-
 
 
             //Set Nodes
